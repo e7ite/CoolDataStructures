@@ -16,3 +16,23 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 include(GoogleTest)
+
+add_library(unrolled_linked_list "")
+set_target_properties(unrolled_linked_list PROPERTIES LINKER_LANGUAGE CXX)
+target_compile_options(unrolled_linked_list PRIVATE -fsanitize=address,undefined)
+target_link_libraries(unrolled_linked_list PRIVATE -fsanitize=address,undefined)
+target_compile_options(unrolled_linked_list PRIVATE -fno-omit-frame-pointer)
+target_link_libraries(unrolled_linked_list PRIVATE -fno-omit-frame-pointer)
+target_compile_options(unrolled_linked_list PRIVATE -g)
+target_link_libraries(unrolled_linked_list PRIVATE -g)
+
+add_executable(unrolled_linked_list_test "")
+target_link_libraries(
+  unrolled_linked_list_test
+  PRIVATE
+  unrolled_linked_list
+  gtest_main
+)
+gtest_discover_tests(unrolled_linked_list_test)
+
+add_subdirectory(unrolled_linked_list)
