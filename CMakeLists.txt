@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(ABSL_PROPAGATE_CXX_STD ON)
+
 add_subdirectory(abseil-cpp)
 
 include(FetchContent)
